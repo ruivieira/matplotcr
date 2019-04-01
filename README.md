@@ -1,2 +1,2 @@
-# matplotcr
+# crystal-matplotlib
 
