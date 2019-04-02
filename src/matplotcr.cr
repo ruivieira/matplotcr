@@ -31,6 +31,7 @@ class Figure
     def save(destination : String)
         s = Array(String).new
         s.push "import matplotlib"
+        s.push "matplotlib.use('Agg')"
         s.push "import matplotlib.pyplot as plt"
         @plots.each { |plot|
             s.push plot.render
