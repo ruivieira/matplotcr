@@ -52,3 +52,31 @@ figure.save("docs/images/hist_bins.png")
 ```
 
 ![plot](images/hist_bins.png)
+
+## line segments
+
+With default values:
+
+```crystal
+x = (0...100).to_a
+y = x.map { |p| p**2 }
+figure = Matplotcr::Figure.new
+hist = Matplotcr::LinePlot.new(x, y)
+figure.add hist
+figure.add Matplotcr::Line.new({2.0, 4.0}, {70.0, 70.0**2})
+```
+
+![plot](images/line_segment.png)
+
+Customised:
+
+```crystal
+x = (0...100).to_a
+y = x.map { |p| p**2 }
+figure = Matplotcr::Figure.new
+hist = Matplotcr::LinePlot.new(x, y, colour="black")
+figure.add hist
+figure.add Matplotcr::Line.new({2.0, 4.0}, {70.0, 70.0**2}, colour="red", linestyle="--")
+```
+
+![plot](images/line_segment_colour.png)

@@ -39,6 +39,27 @@ describe Matplotcr do
       figure.add hist
       figure.save("docs/images/hist_bins.png")
     end
+    it "must produce a line segment with defaults" do
+      x = (0...100).to_a
+      y = x.map { |p| p**2 }
+      figure = Matplotcr::Figure.new
+      
+      hist = Matplotcr::LinePlot.new(x, y)
+      figure.add hist
+      figure.add Matplotcr::Line.new({2.0, 4.0}, {70.0, 70.0**2})
+      figure.save("docs/images/line_segment.png")
+    end
+        it "must produce a line segment with defaults" do
+      x = (0...100).to_a
+      y = x.map { |p| p**2 }
+      figure = Matplotcr::Figure.new
+      
+      hist = Matplotcr::LinePlot.new(x, y, colour="black")
+      figure.add hist
+      figure.add Matplotcr::Line.new({2.0, 4.0}, {70.0, 70.0**2}, colour="red", linestyle="--")
+      figure.save("docs/images/line_segment_colour.png")
+    end
+
   end
 
 end
