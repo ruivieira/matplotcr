@@ -1,4 +1,5 @@
 require "./spec_helper"
+require "gsl"
 
 describe Matplotcr do
   describe "Line plot" do
@@ -21,6 +22,22 @@ describe Matplotcr do
       figure.add lineplot
       figure.add lineplot2
       figure.save("docs/images/test_colour.png")
+    end
+    it "must produce a default histogram" do
+      y = Statistics::Normal.sample(1000, 0.0, 2.0)
+      figure = Matplotcr::Figure.new
+      
+      hist = Matplotcr::Histogram.new(y)
+      figure.add hist
+      figure.save("docs/images/hist_default.png")
+    end
+    it "must produce a histogram with custom bins" do
+      y = Statistics::Normal.sample(1000, 0.0, 2.0)
+      figure = Matplotcr::Figure.new
+      
+      hist = Matplotcr::Histogram.new(y, bins=200)
+      figure.add hist
+      figure.save("docs/images/hist_bins.png")
     end
   end
 
