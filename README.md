@@ -1,4 +1,5 @@
-# crystal-matplotlib
+![https://gitlab.com/ruivieira/matplotcr](https://gitlab.com/ruivieira/matplotcr/badges/master/pipeline.svg)
+# matplotcr
 
 A Crystal wrapper for matplotlib.
 
