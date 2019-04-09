@@ -49,7 +49,7 @@ describe Matplotcr do
       figure.add Matplotcr::Line.new({2.0, 4.0}, {70.0, 70.0**2})
       figure.save("docs/images/line_segment.png")
     end
-        it "must produce a line segment with defaults" do
+    it "must produce a line segment with defaults" do
       x = (0...100).to_a
       y = x.map { |p| p**2 }
       figure = Matplotcr::Figure.new
@@ -58,6 +58,29 @@ describe Matplotcr do
       figure.add hist
       figure.add Matplotcr::Line.new({2.0, 4.0}, {70.0, 70.0**2}, colour="red", linestyle="--")
       figure.save("docs/images/line_segment_colour.png")
+    end
+    it "must produce a plot with a different font" do
+      font = Matplotcr::RCFont.new "monospace", ["Courier New"]
+      figure = Matplotcr::Figure.new font: font
+      x = [1, 2, 3, 4]
+      y = [5.5, 7.6, 11.1, 6.5]
+      lineplot = Matplotcr::LinePlot.new(x, y)
+      lineplot2 = Matplotcr::ScatterPlot.new(x, y)
+      figure.add lineplot
+      figure.add lineplot2
+      figure.save("docs/images/test_font.png")
+    end
+    it "must produce a plot with a latex title" do
+      figure = Matplotcr::Figure.new
+      x = [1, 2, 3, 4]
+      y = [5.5, 7.6, 11.1, 6.5]
+      lineplot = Matplotcr::LinePlot.new(x, y)
+      title = Matplotcr::Title.new %q("A plot with a title.")
+      lineplot2 = Matplotcr::ScatterPlot.new(x, y)
+      figure.add lineplot
+      figure.add title
+      figure.add lineplot2
+      figure.save("docs/images/plot_title.png")
     end
 
   end

@@ -12,11 +12,16 @@ module Matplotcr
     end
   end
 
+  class RCFont
+    getter family, styles
+    def initialize(@family : String, @styles : Array(String))
+    end
+  end
+
   class Figure
     @plots = Array(Plot).new
 
-    def initialize(python : String = "/usr/local/bin/python3")
-      @python = python
+    def initialize(@python : String = "/usr/local/bin/python3", @font : RCFont = RCFont.new("sans-serif", ["Lucida Grande"]), @latex : Bool = false)
     end
 
     def add(plot : Plot)
@@ -34,18 +39,37 @@ module Matplotcr
       s = Array(String).new
       s.push "import matplotlib"
       s.push "matplotlib.use('Agg')"
+      s.push "from matplotlib import rc"
       s.push "import matplotlib.pyplot as plt"
       s.push "from matplotlib.lines import Line2D"
+      s.push "rc('font', **{'family': '#{@font.family}', 'serif': '#{@font.styles.to_s}'})"
+      s.push "rc('text', usetex=#{@latex ? "True" : "False"})"
+      s.push "matplotlib.rcParams['text.latex.unicode']=True"
       @plots.each { |plot|
         s.push plot.render
       }
       s.push "plt.savefig('#{destination}', format='png', transparent=False)"
-
+      puts s.join("\n")
       # create temporary file for the script
       tempfile = File.tempfile("matplotcrystal", ".py")
       File.write(tempfile.path, s.join("\n"))
       system "#{@python} #{tempfile.path}"
     end
+  end
+
+  class Title < Plot
+
+    def initialize(@text : String, @raw : Bool = true)
+    end
+
+    def render : String
+      if @raw
+        return "plt.title(r#{@text})"
+      else
+        return "plt.title(#{@text})"
+      end
+    end
+
   end
 
   class LinePlot < Plot
