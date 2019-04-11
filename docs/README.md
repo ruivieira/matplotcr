@@ -97,3 +97,17 @@ figure.add title
 ```
 
 ![plot](images/plot_title.png)
+
+## vertical and horizontal lines
+
+```crystal
+figure = Matplotcr::Figure.new
+x = (0...1000).to_a
+y = x.map { |n| Math.sin(n / 50.0) }
+lineplot = Matplotcr::LinePlot.new(x, y, colour: "red")
+figure.add lineplot
+figure.add Matplotcr::HorizontalLine.new y: 0 , colour: "black", linestyle: "--"
+(1..6).each { |i| figure.add Matplotcr::VerticalLine.new x: Math::PI * i * 50.0, colour: "blue", linestyle: "-."}
+```
+
+![plot](images/plot_hv_lines.png)

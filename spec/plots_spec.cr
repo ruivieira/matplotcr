@@ -80,6 +80,16 @@ describe Matplotcr do
       figure.add title
       figure.save("docs/images/plot_title.png")
     end
+    it "must produce vertical and horizontal lines" do
+      figure = Matplotcr::Figure.new
+      x = (0...1000).to_a
+      y = x.map { |n| Math.sin(n / 50.0) }
+      lineplot = Matplotcr::LinePlot.new(x, y, colour: "red")
+      figure.add lineplot
+      figure.add Matplotcr::HorizontalLine.new y: 0 , colour: "black", linestyle: "--"
+      (1..6).each { |i| figure.add Matplotcr::VerticalLine.new x: Math::PI * i * 50.0, colour: "blue", linestyle: "-."}
+      figure.save("docs/images/plot_hv_lines.png")
+    end
 
   end
 
