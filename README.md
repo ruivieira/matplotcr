@@ -9,6 +9,8 @@ A Crystal wrapper for matplotlib.
 * Scatter plots
 * Histograms
 * Line segments
+* Axis (horizontal and vertical) lines
+* Font customisation
 
 # Examples
 
