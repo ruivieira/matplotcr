@@ -80,3 +80,20 @@ figure.add Matplotcr::Line.new({2.0, 4.0}, {70.0, 70.0**2}, colour="red", linest
 ```
 
 ![plot](images/line_segment_colour.png)
+
+## titles and fonts
+
+A plot with a title and custom font ("courier new" in this case):
+
+```crystal
+font = Matplotcr::RCFont.new "monospace", ["Courier New"]
+figure = Matplotcr::Figure.new font: font
+x = (0...1000).to_a
+y = x.map { |n| Math.sin(n / 50.0) }
+lineplot = Matplotcr::LinePlot.new(x, y, colour: "red")
+title = Matplotcr::Title.new %q("A plot with a title (in Courier New).")
+figure.add lineplot
+figure.add title
+```
+
+![plot](images/plot_title.png)

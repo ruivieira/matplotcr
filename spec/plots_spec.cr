@@ -68,18 +68,16 @@ describe Matplotcr do
       lineplot2 = Matplotcr::ScatterPlot.new(x, y)
       figure.add lineplot
       figure.add lineplot2
-      figure.save("docs/images/test_font.png")
     end
-    it "must produce a plot with a latex title" do
-      figure = Matplotcr::Figure.new
-      x = [1, 2, 3, 4]
-      y = [5.5, 7.6, 11.1, 6.5]
-      lineplot = Matplotcr::LinePlot.new(x, y)
-      title = Matplotcr::Title.new %q("A plot with a title.")
-      lineplot2 = Matplotcr::ScatterPlot.new(x, y)
+    it "must produce a plot with a title" do
+      font = Matplotcr::RCFont.new "monospace", ["Courier New"]
+      figure = Matplotcr::Figure.new font: font
+      x = (0...1000).to_a
+      y = x.map { |n| Math.sin(n / 50.0) }
+      lineplot = Matplotcr::LinePlot.new(x, y, colour: "red")
+      title = Matplotcr::Title.new %q("A plot with a title (in Courier New).")
       figure.add lineplot
       figure.add title
-      figure.add lineplot2
       figure.save("docs/images/plot_title.png")
     end
 
