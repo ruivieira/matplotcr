@@ -111,3 +111,17 @@ figure.add Matplotcr::HorizontalLine.new y: 0 , colour: "black", linestyle: "--"
 ```
 
 ![plot](images/plot_hv_lines.png)
+
+## annotations
+
+```crystal
+figure = Matplotcr::Figure.new
+x = [1, 2, 3, 4]
+y = [5.5, 7.6, 11.1, 6.5]
+lineplot = Matplotcr::ScatterPlot.new(x, y)
+figure.add lineplot
+points = x.zip(y).map { |a,b| [a, b]}
+(0...2).each { |i| figure.add Matplotcr::Annotation.new points[i][0] + 0.1, points[i][1] + 0.1, "p#{i}" }
+```
+
+![plot](images/annotation.png)

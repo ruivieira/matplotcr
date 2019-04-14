@@ -195,4 +195,13 @@ module Matplotcr
       end
     end
   end
+
+  class Annotation < Plot
+    def initialize(@x : Number, @y : Number, @text : String)
+    end
+
+    def render : String
+      return "ax=plt.gca()\nax.annotate('#{@text}', xy=(#{@x}, #{@y}))"
+    end
+  end
 end

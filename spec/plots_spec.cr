@@ -90,7 +90,16 @@ describe Matplotcr do
       (1..6).each { |i| figure.add Matplotcr::VerticalLine.new x: Math::PI * i * 50.0, colour: "blue", linestyle: "-."}
       figure.save("docs/images/plot_hv_lines.png")
     end
-
+    it "must produce an annotation" do
+      figure = Matplotcr::Figure.new latex: true
+      x = [1, 2, 3, 4]
+      y = [5.5, 7.6, 11.1, 6.5]
+      lineplot = Matplotcr::ScatterPlot.new(x, y)
+      figure.add lineplot
+      points = x.zip(y).map { |a,b| [a, b]}
+      (0...2).each { |i| figure.add Matplotcr::Annotation.new points[i][0] + 0.1, points[i][1] + 0.1, "$p_#{i}$" }
+      figure.save("docs/images/annotation.png")
+    end
   end
 
 end
