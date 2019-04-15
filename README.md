@@ -12,6 +12,8 @@ A Crystal wrapper for matplotlib.
 * Axis (horizontal and vertical) lines
 * Font customisation
 * Annotations
+* Custom size and DPI
+* Sub-plots
 
 # Examples
 
