@@ -1,6 +1,7 @@
 # changelog
 
 * 0.1.8
+  * Add support for sub-plots
   * Add custom plot size and dpi
 * 0.1.7
   * Add annotations

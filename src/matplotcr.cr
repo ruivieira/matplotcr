@@ -19,23 +19,24 @@ module Matplotcr
   end
 
   class Figure
-    @plots = Array(Plot).new
+    @plots = Array(Array(Plot)).new
+    @current_index = 0
 
     def initialize(@python : String = "/usr/local/bin/python3",
                    @font : RCFont = RCFont.new("sans-serif", ["Lucida Grande"]),
                    @latex : Bool = false,
-                   @figsize : Tuple(Float64, Float64) | Nil = nil)
+                   @figsize : Tuple(Float64, Float64) | Nil = nil,
+                   @grid : Tuple(Int32, Int32) = {1, 1})
+      @plots.push(Array(Plot).new)
     end
 
     def add(plot : Plot)
-      @plots.push plot
+      @plots[@current_index].push plot
     end
 
-    def render : String
-      @plots.each { |plot|
-        @script.push plot.render
-      }
-      return @script.join("\n")
+    def subplot()
+      @current_index += 1
+      @plots.push(Array(Plot).new)
     end
 
     def save(destination : String, dpi : Int64 | Nil = nil)
@@ -54,8 +55,11 @@ module Matplotcr
       else
         s.push "fig = plt.figure(figsize=(#{fs[0]},#{fs[1]}))"
       end
-      @plots.each { |plot|
-        s.push plot.render
+      (0...@plots.size).each { |n|
+        s.push "plt.subplot(#{@grid[0]}, #{@grid[1]}, #{n+1})"
+        @plots[n].each { |plot|
+          s.push plot.render
+        }
       }
       if dpi.nil?
         s.push "plt.savefig('#{destination}', format='png', transparent=False)"

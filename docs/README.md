@@ -144,3 +144,42 @@ figure.save("docs/images/custom_size.png", dpi: 180)
 ```
 
 ![plot](images/custom_size.png)
+
+
+### side-by-side plots
+
+```crystal
+figure = Matplotcr::Figure.new figsize: {8.0, 4.0}, grid: {1, 2}
+x = (0...1000).to_a
+y = x.map { |n| Math.sin(n / 50.0) }
+lineplot = Matplotcr::LinePlot.new(x, y, colour: "red")
+figure.add lineplot
+figure.add Matplotcr::HorizontalLine.new y: 0 , colour: "black", linestyle: "--"
+(1..6).each { |i| figure.add Matplotcr::VerticalLine.new x: Math::PI * i * 50.0, colour: "blue", linestyle: "-."}
+figure.subplot()
+x = [1, 2, 3, 4]
+y = [5.5, 7.6, 11.1, 6.5]
+lineplot = Matplotcr::LinePlot.new(x, y)
+lineplot2 = Matplotcr::ScatterPlot.new(x, y)
+figure.add lineplot
+figure.add lineplot2
+figure.save("docs/images/side_by_side.png")
+```
+
+![plot](images/side_by_side.png)
+
+### simple grid
+
+```crystal
+x = (0...300).to_a
+figure = Matplotcr::Figure.new figsize: {8.0, 4.0}, grid: {3, 3}
+(0...9).each { |n|
+    if n > 0
+        figure.subplot
+    end
+    figure.add Matplotcr::LinePlot.new(x, x.map { |i| Math.sin n.to_f * i}, colour: "red")
+}
+figure.save("docs/images/grid.png")
+```
+
+![plot](images/grid.png)
