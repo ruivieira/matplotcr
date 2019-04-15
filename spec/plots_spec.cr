@@ -100,6 +100,17 @@ describe Matplotcr do
       (0...2).each { |i| figure.add Matplotcr::Annotation.new points[i][0] + 0.1, points[i][1] + 0.1, "$p_#{i}$" }
       figure.save("docs/images/annotation.png")
     end
+    it "must produce a plot with custom size" do
+      figure = Matplotcr::Figure.new(figsize: {20.0, 2.0})
+      x = (0...1000).to_a
+      y = x.map { |n| Math.sin(n / 50.0) }
+      lineplot = Matplotcr::LinePlot.new(x, y, colour: "red")
+      figure.add lineplot
+      figure.add Matplotcr::HorizontalLine.new y: 0 , colour: "black", linestyle: "--"
+      (1..6).each { |i| figure.add Matplotcr::VerticalLine.new x: Math::PI * i * 50.0, colour: "blue", linestyle: "-."}
+      figure.save("docs/images/custom_size.png", dpi: 180)
+    end
+
   end
 
 end

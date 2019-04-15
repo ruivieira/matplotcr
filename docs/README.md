@@ -1,6 +1,8 @@
 # examples
 
-## line, scatter with defaults
+## plot types
+
+### line, scatter with defaults
 
 ```crystal
 figure = Matplotcr::Figure.new
@@ -12,7 +14,7 @@ figure.add lineplot2
 
 ![plot](images/test.png)
 
-## line, scatter with options
+### line, scatter with options
 
 ```crystal
 figure = Matplotcr::Figure.new
@@ -27,7 +29,7 @@ figure.save("docs/images/test_colour.png")
 
 ![plot](images/test_colour.png)
 
-## histograms
+### histograms
 
 With default values:
 
@@ -53,7 +55,7 @@ figure.save("docs/images/hist_bins.png")
 
 ![plot](images/hist_bins.png)
 
-## line segments
+### line segments
 
 With default values:
 
@@ -81,7 +83,7 @@ figure.add Matplotcr::Line.new({2.0, 4.0}, {70.0, 70.0**2}, colour="red", linest
 
 ![plot](images/line_segment_colour.png)
 
-## titles and fonts
+### titles and fonts
 
 A plot with a title and custom font ("courier new" in this case):
 
@@ -98,7 +100,7 @@ figure.add title
 
 ![plot](images/plot_title.png)
 
-## vertical and horizontal lines
+### vertical and horizontal lines
 
 ```crystal
 figure = Matplotcr::Figure.new
@@ -112,7 +114,7 @@ figure.add Matplotcr::HorizontalLine.new y: 0 , colour: "black", linestyle: "--"
 
 ![plot](images/plot_hv_lines.png)
 
-## annotations
+### annotations
 
 ```crystal
 figure = Matplotcr::Figure.new
@@ -125,3 +127,20 @@ points = x.zip(y).map { |a,b| [a, b]}
 ```
 
 ![plot](images/annotation.png)
+
+## output options
+
+### custom plot size
+
+```crystal
+figure = Matplotcr::Figure.new(figsize: {20.0, 2.0})
+x = (0...1000).to_a
+y = x.map { |n| Math.sin(n / 50.0) }
+lineplot = Matplotcr::LinePlot.new(x, y, colour: "red")
+figure.add lineplot
+figure.add Matplotcr::HorizontalLine.new y: 0 , colour: "black", linestyle: "--"
+(1..6).each { |i| figure.add Matplotcr::VerticalLine.new x: Math::PI * i * 50.0, colour: "blue", linestyle: "-."}
+figure.save("docs/images/custom_size.png", dpi: 180)
+```
+
+![plot](images/custom_size.png)

@@ -21,7 +21,10 @@ module Matplotcr
   class Figure
     @plots = Array(Plot).new
 
-    def initialize(@python : String = "/usr/local/bin/python3", @font : RCFont = RCFont.new("sans-serif", ["Lucida Grande"]), @latex : Bool = false)
+    def initialize(@python : String = "/usr/local/bin/python3",
+                   @font : RCFont = RCFont.new("sans-serif", ["Lucida Grande"]),
+                   @latex : Bool = false,
+                   @figsize : Tuple(Float64, Float64) | Nil = nil)
     end
 
     def add(plot : Plot)
@@ -35,7 +38,7 @@ module Matplotcr
       return @script.join("\n")
     end
 
-    def save(destination : String)
+    def save(destination : String, dpi : Int64 | Nil = nil)
       s = Array(String).new
       s.push "import matplotlib"
       s.push "matplotlib.use('Agg')"
@@ -45,10 +48,20 @@ module Matplotcr
       s.push "rc('font', **{'family': '#{@font.family}', 'serif': '#{@font.styles.to_s}'})"
       s.push "rc('text', usetex=#{@latex ? "True" : "False"})"
       s.push "matplotlib.rcParams['text.latex.unicode']=True"
+      fs = @figsize
+      if fs.nil?
+        s.push "fig = plt.figure()"
+      else
+        s.push "fig = plt.figure(figsize=(#{fs[0]},#{fs[1]}))"
+      end
       @plots.each { |plot|
         s.push plot.render
       }
-      s.push "plt.savefig('#{destination}', format='png', transparent=False)"
+      if dpi.nil?
+        s.push "plt.savefig('#{destination}', format='png', transparent=False)"
+      else
+        s.push "plt.savefig('#{destination}', format='png', transparent=False, dpi=#{dpi})"
+      end
       puts s.join("\n")
       # create temporary file for the script
       tempfile = File.tempfile("matplotcrystal", ".py")
