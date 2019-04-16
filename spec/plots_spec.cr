@@ -138,6 +138,17 @@ describe Matplotcr do
       }
       figure.save("docs/images/grid.png")
     end
+    it "must produce valid x and y limits" do
+      x = Statistics::Normal.sample(1000, 0.0, 2.0)
+      y = Statistics::Normal.sample(1000, 0.0, 2.0)
+      figure = Matplotcr::Figure.new figsize: {8.0, 4.0}, grid: {1, 2}
+      figure.add Matplotcr::XLimit.new 0.0, 1.0
+      figure.add Matplotcr::ScatterPlot.new x, y
+      figure.subplot
+      figure.add Matplotcr::YLimit.new -1.0, 0.0
+      figure.add Matplotcr::ScatterPlot.new x, y
+      figure.save("docs/images/limits.png")
+    end
   end
 
 end

@@ -14,6 +14,7 @@ A Crystal wrapper for matplotlib.
 * Annotations
 * Custom size and DPI
 * Sub-plots
+* Horizontal and vertical limits
 
 # Examples
 

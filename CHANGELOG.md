@@ -1,5 +1,7 @@
 # changelog
 
+* 0.1.9
+  * Add support for horizontal and vertical limits
 * 0.1.8
   * Add support for sub-plots
   * Add custom plot size and dpi

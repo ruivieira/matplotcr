@@ -183,3 +183,18 @@ figure.save("docs/images/grid.png")
 ```
 
 ![plot](images/grid.png)
+
+### horizontal and vertical limits
+
+```crystal
+x = Statistics::Normal.sample(1000, 0.0, 2.0)
+y = Statistics::Normal.sample(1000, 0.0, 2.0)
+figure = Matplotcr::Figure.new figsize: {8.0, 4.0}, grid: {1, 2}
+figure.add Matplotcr::XLimit.new 0.0, 1.0
+figure.add Matplotcr::ScatterPlot.new x, y
+figure.subplot
+figure.add Matplotcr::YLimit.new -1.0, 0.0
+figure.add Matplotcr::ScatterPlot.new x, y
+```
+
+![plot](images/limits.png)

@@ -221,4 +221,23 @@ module Matplotcr
       return "ax=plt.gca()\nax.annotate('#{@text}', xy=(#{@x}, #{@y}))"
     end
   end
+
+  class XLimit < Plot
+    def initialize(@min : Number, @max : Number)
+    end
+
+    def render : String
+      return "ax=plt.gca()\nax.set_xlim([#{@min},#{@max}])"
+    end
+  end
+
+  class YLimit < Plot
+    def initialize(@min : Number, @max : Number)
+    end
+
+    def render : String
+      return "ax=plt.gca()\nax.set_ylim([#{@min},#{@max}])"
+    end
+  end
+
 end
