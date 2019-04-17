@@ -115,16 +115,17 @@ module Matplotcr
   end
 
   class ScatterPlot < Plot
-    def initialize(x : NumberArray, y : NumberArray, colour : String = "")
-      @x = x
-      @y = y
-      @colour = colour
+    def initialize(@x : NumberArray, @y : NumberArray, @colour : String = "", @marker : String | Nil = nil)
     end
 
     def render : String
       args = Array(String).new
       if @colour != ""
         args.push "color='#{@colour}'"
+      end
+      marker = @marker
+      if !marker.nil?
+        args.push "marker='#{marker}'"
       end
 
       if !args.empty?
@@ -214,11 +215,21 @@ module Matplotcr
   end
 
   class Annotation < Plot
-    def initialize(@x : Number, @y : Number, @text : String)
+    def initialize(@x : Number, @y : Number, @text : String, @colour : String | Nil = nil)
     end
 
     def render : String
-      return "ax=plt.gca()\nax.annotate('#{@text}', xy=(#{@x}, #{@y}))"
+      colour = @colour
+      args = Array(String).new
+      if !colour.nil?
+        args.push "color='#{colour}'"
+      end
+      
+      if args.empty?
+        return "ax=plt.gca()\nax.annotate('#{@text}', xy=(#{@x}, #{@y}))"
+      else
+        return "ax=plt.gca()\nax.annotate('#{@text}', xy=(#{@x}, #{@y}), #{args.join(",")})"
+      end
     end
   end
 

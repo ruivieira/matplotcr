@@ -1,5 +1,7 @@
 # changelog
 
+* 0.1.10
+  * Add support for custom markers in scatter plots
 * 0.1.9
   * Add support for horizontal and vertical limits
 * 0.1.8

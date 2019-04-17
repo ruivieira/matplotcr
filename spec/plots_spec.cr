@@ -23,6 +23,16 @@ describe Matplotcr do
       figure.add lineplot2
       figure.save("docs/images/test_colour.png")
     end
+    it "must produce a line plot with custom markers" do
+      figure = Matplotcr::Figure.new
+      x = [1, 2, 3, 4]
+      y = [5.5, 7.6, 11.1, 6.5]
+      lineplot = Matplotcr::LinePlot.new(x, y, colour="red", linestyle="--")
+      lineplot2 = Matplotcr::ScatterPlot.new(x, y, colour="green", marker="*")
+      figure.add lineplot
+      figure.add lineplot2
+      figure.save("docs/images/marker.png")
+    end
     it "must produce a default histogram" do
       y = Statistics::Normal.sample(1000, 0.0, 2.0)
       figure = Matplotcr::Figure.new
