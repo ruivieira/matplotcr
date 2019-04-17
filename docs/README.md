@@ -29,6 +29,20 @@ figure.save("docs/images/test_colour.png")
 
 ![plot](images/test_colour.png)
 
+Custom markers:
+
+```crystal
+figure = Matplotcr::Figure.new
+x = [1, 2, 3, 4]
+y = [5.5, 7.6, 11.1, 6.5]
+lineplot = Matplotcr::LinePlot.new(x, y, colour="red", linestyle="--")
+lineplot2 = Matplotcr::ScatterPlot.new(x, y, colour="green", marker="*")
+figure.add lineplot
+figure.add lineplot2
+```
+
+![plot](images/marker.png)
+
 ### histograms
 
 With default values:
