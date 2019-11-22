@@ -149,7 +149,7 @@ module Matplotcr
   end
 
   class Density < Plot
-    def initialize(@x : NumberArray, @points : Int32 = 100, @colour : String = "", @marker : String | Nil = nil, linestyle : String | Nil = nil)
+    def initialize(@x : NumberArray, @points : Int32 = 100, @colour : String = "", @marker : String | Nil = nil, @linestyle : String | Nil = nil)
     end
 
     def render : String
