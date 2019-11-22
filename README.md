@@ -7,7 +7,7 @@ A Crystal wrapper for matplotlib.
 
 * Line plots
 * Scatter plots
-* Histograms
+* Histograms (and density plots)
 * Line segments
 * Axis (horizontal and vertical) lines
 * Font customisation
@@ -21,10 +21,21 @@ A Crystal wrapper for matplotlib.
 
 Examples can be found [here](docs/README.md).
 
+# Requirements
+
+`matplotcr` additionally requires:
+
+* Python (3.x)
+* matplotlib
+* numpy
+* scipy (for KDE plots)
+
+to be installed.
+
 # Contributing
 
- * Fork it (https://gitlab.com/ruivieira/matplotcr)
- * Create your feature branch (`git checkout -b my-new-feature`)
- * Commit your changes (`git commit -am 'Add some feature'`)
- * Push to the branch (`git push origin my-new-feature`)
- * Create a new Pull Request
+* Fork it (https://gitlab.com/ruivieira/matplotcr)
+* Create your feature branch (`git checkout -b my-new-feature`)
+* Commit your changes (`git commit -am 'Add some feature'`)
+* Push to the branch (`git push origin my-new-feature`)
+* Create a new Pull Request

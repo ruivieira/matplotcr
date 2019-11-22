@@ -69,6 +69,32 @@ figure.save("docs/images/hist_bins.png")
 
 ![plot](images/hist_bins.png)
 
+and also KDE density plots. With the defaults:
+
+```crystal
+y = Statistics::Normal.sample(1000, 0.0, 2.0)
+figure = Matplotcr::Figure.new
+
+hist = Matplotcr::Density.new(y)
+figure.add hist
+figure.save("docs/images/density_default.png")
+```
+
+![plot](images/density_default.png)
+
+and with a custom number of segments (`points = 10`):
+
+```crystal
+y = Statistics::Normal.sample(1000, 0.0, 2.0)
+figure = Matplotcr::Figure.new
+
+hist = Matplotcr::Density.new(y, steps = 10)
+figure.add hist
+figure.save("docs/images/density_small_steps.png")
+```
+
+![plot](images/density_small_steps.png)
+
 ### line segments
 
 With default values:

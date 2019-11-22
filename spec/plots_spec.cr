@@ -49,6 +49,22 @@ describe Matplotcr do
       figure.add hist
       figure.save("docs/images/hist_bins.png")
     end
+    it "must produce a default density plot" do
+      y = Statistics::Normal.sample(1000, 0.0, 2.0)
+      figure = Matplotcr::Figure.new
+      
+      hist = Matplotcr::Density.new(y)
+      figure.add hist
+      figure.save("docs/images/density_default.png")
+    end
+    it "must produce a default density plot with few steps" do
+      y = Statistics::Normal.sample(1000, 0.0, 2.0)
+      figure = Matplotcr::Figure.new
+      
+      hist = Matplotcr::Density.new(y, steps = 10)
+      figure.add hist
+      figure.save("docs/images/density_small_steps.png")
+    end
     it "must produce a line segment with defaults" do
       x = (0...100).to_a
       y = x.map { |p| p**2 }
