@@ -161,6 +161,7 @@ module Matplotcr
       if !marker.nil?
         args.push "marker='#{marker}'"
       end
+      linestyle = @linestyle
       if !linestyle.nil?
         args.push "linestyle='#{@linestyle}'"
       end
