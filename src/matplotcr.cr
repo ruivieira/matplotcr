@@ -149,10 +149,19 @@ module Matplotcr
   end
 
   class Density < Plot
-    def initialize(@x : NumberArray, @points : Int32 = 100)
+    def initialize(@x : NumberArray, @points : Int32 = 100, @colour : String = "", @marker : String | Nil = nil)
     end
 
     def render : String
+      args = Array(String).new
+      if @colour != ""
+        args.push "color='#{@colour}'"
+      end
+      marker = @marker
+      if !marker.nil?
+        args.push "marker='#{marker}'"
+      end
+
       s = Array(String).new
       s.push("from scipy import stats")
       s.push("import numpy as np")
@@ -162,7 +171,13 @@ module Matplotcr
       steps = ((x_max - x_min).abs).fdiv(@points)
       s.push("_density = stats.kde.gaussian_kde(_data)")
       s.push("_x = np.arange(#{x_min}, #{x_max}, #{steps})")
-      s.push("plt.plot(_x, _density(_x))")
+
+      if !args.empty?
+        s.push("plt.plot(_x, _density(_x), #{args.join(",")})")
+      else
+        s.push("plt.plot(_x, _density(_x))")
+      end
+
       return s.join("\n")
     end
 
