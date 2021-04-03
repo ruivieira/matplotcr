@@ -1,0 +1,14 @@
+image: ubuntu/latest
+packages:
+  - curl
+  - unzip
+sources:
+  - https://git.sr.ht/~ruivieira/matplotcr
+tasks:
+  - setup: |
+      curl -fsSL https://crystal-lang.org/install.sh | sudo bash
+  - test: |
+      cd matplotcr
+      shards install --ignore-crystal-version
+      crystal spec
+      crystal spec
