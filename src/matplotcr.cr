@@ -49,7 +49,6 @@ module Matplotcr
       s.push "from matplotlib.lines import Line2D"
       s.push "rc('font', **{'family': '#{@font.family}', 'serif': '#{@font.styles.to_s}'})"
       s.push "rc('text', usetex=#{@latex ? "True" : "False"})"
-      s.push "matplotlib.rcParams['text.latex.unicode']=True"
       fs = @figsize
       if fs.nil?
         s.push "fig = plt.figure()"
@@ -72,6 +71,12 @@ module Matplotcr
       tempfile = File.tempfile("matplotcrystal", ".py")
       File.write(tempfile.path, s.join("\n"))
       system "#{@python} #{tempfile.path}"
+    end
+
+    def show : String
+      tempfile = File.tempfile("matplotcr-plot-", ".png")
+      save(tempfile.path)
+      return File.read(tempfile.path)
     end
   end
 
