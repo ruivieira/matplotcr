@@ -8,5 +8,4 @@ development_dependencies:
   gsl:
     github: ruivieira/crystal-gsl
 
-
 license: Apache2.0
