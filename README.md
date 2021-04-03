@@ -26,10 +26,10 @@ Examples can be found [here](docs/README.md).
 
 `matplotcr` additionally requires:
 
-* Python (3.x)
-* matplotlib
-* numpy
-* scipy (for KDE plots)
+- Python (3.x)
+- matplotlib
+- numpy
+- scipy (for KDE plots)
 
 to be installed.
 
@@ -40,3 +40,11 @@ to be installed.
 - Commit your changes (`git commit -am 'Add some feature'`)
 - Push to the branch (`git push origin my-new-feature`)
 - Create a new Pull Request
+
+# mailing lists
+
+- Announcements: [https://lists.sr.ht/~ruivieira/crystal-announce](https://lists.sr.ht/~ruivieira/crystal-announce)
+- Discussion: [https://lists.sr.ht/~ruivieira/crystal-discuss](https://lists.sr.ht/~ruivieira/crystal-discuss)
+- Development: [https://lists.sr.ht/~ruivieira/crystal-devel](https://lists.sr.ht/~ruivieira/crystal-devel)
+
+Please prefix the subject with `[matplotcr]`.
