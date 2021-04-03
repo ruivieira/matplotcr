@@ -66,7 +66,6 @@ module Matplotcr
       else
         s.push "plt.savefig('#{destination}', format='png', transparent=False, dpi=#{dpi})"
       end
-      puts s.join("\n")
       # create temporary file for the script
       tempfile = File.tempfile("matplotcrystal", ".py")
       File.write(tempfile.path, s.join("\n"))
