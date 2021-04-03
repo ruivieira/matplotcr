@@ -13,6 +13,6 @@ jobs:
         with:
           crystal: 1.0.0
       - uses: actions/checkout@v2
-      - run: shards install
+      - run: shards install --ignore-crystal-version
       - run: crystal spec
       - run: crystal tool format && git diff --exit-code
