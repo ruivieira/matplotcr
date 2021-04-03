@@ -17,8 +17,8 @@ describe Matplotcr do
       figure = Matplotcr::Figure.new
       x = [1, 2, 3, 4]
       y = [5.5, 7.6, 11.1, 6.5]
-      lineplot = Matplotcr::LinePlot.new(x, y, colour="red", linestyle="--")
-      lineplot2 = Matplotcr::ScatterPlot.new(x, y, colour="green")
+      lineplot = Matplotcr::LinePlot.new(x, y, colour = "red", linestyle = "--")
+      lineplot2 = Matplotcr::ScatterPlot.new(x, y, colour = "green")
       figure.add lineplot
       figure.add lineplot2
       figure.save("docs/images/test_colour.png")
@@ -27,8 +27,8 @@ describe Matplotcr do
       figure = Matplotcr::Figure.new
       x = [1, 2, 3, 4]
       y = [5.5, 7.6, 11.1, 6.5]
-      lineplot = Matplotcr::LinePlot.new(x, y, colour="red", linestyle="--")
-      lineplot2 = Matplotcr::ScatterPlot.new(x, y, colour="green", marker="*")
+      lineplot = Matplotcr::LinePlot.new(x, y, colour = "red", linestyle = "--")
+      lineplot2 = Matplotcr::ScatterPlot.new(x, y, colour = "green", marker = "*")
       figure.add lineplot
       figure.add lineplot2
       figure.save("docs/images/marker.png")
@@ -36,7 +36,7 @@ describe Matplotcr do
     it "must produce a default histogram" do
       y = Statistics::Normal.sample(1000, 0.0, 2.0)
       figure = Matplotcr::Figure.new
-      
+
       hist = Matplotcr::Histogram.new(y)
       figure.add hist
       figure.save("docs/images/hist_default.png")
@@ -44,15 +44,15 @@ describe Matplotcr do
     it "must produce a histogram with custom bins" do
       y = Statistics::Normal.sample(1000, 0.0, 2.0)
       figure = Matplotcr::Figure.new
-      
-      hist = Matplotcr::Histogram.new(y, bins=200)
+
+      hist = Matplotcr::Histogram.new(y, bins = 200)
       figure.add hist
       figure.save("docs/images/hist_bins.png")
     end
     it "must produce a default density plot" do
       y = Statistics::Normal.sample(1000, 0.0, 2.0)
       figure = Matplotcr::Figure.new
-      
+
       hist = Matplotcr::Density.new(y)
       figure.add hist
       figure.save("docs/images/density_default.png")
@@ -60,7 +60,7 @@ describe Matplotcr do
     it "must produce a default density plot with few steps" do
       y = Statistics::Normal.sample(1000, 0.0, 2.0)
       figure = Matplotcr::Figure.new
-      
+
       hist = Matplotcr::Density.new(y, steps = 10)
       figure.add hist
       figure.save("docs/images/density_small_steps.png")
@@ -69,7 +69,7 @@ describe Matplotcr do
       x = (0...100).to_a
       y = x.map { |p| p**2 }
       figure = Matplotcr::Figure.new
-      
+
       hist = Matplotcr::LinePlot.new(x, y)
       figure.add hist
       figure.add Matplotcr::Line.new({2.0, 4.0}, {70.0, 70.0**2})
@@ -79,10 +79,10 @@ describe Matplotcr do
       x = (0...100).to_a
       y = x.map { |p| p**2 }
       figure = Matplotcr::Figure.new
-      
-      hist = Matplotcr::LinePlot.new(x, y, colour="black")
+
+      hist = Matplotcr::LinePlot.new(x, y, colour = "black")
       figure.add hist
-      figure.add Matplotcr::Line.new({2.0, 4.0}, {70.0, 70.0**2}, colour="red", linestyle="--")
+      figure.add Matplotcr::Line.new({2.0, 4.0}, {70.0, 70.0**2}, colour = "red", linestyle = "--")
       figure.save("docs/images/line_segment_colour.png")
     end
     it "must produce a plot with a different font" do
@@ -112,8 +112,8 @@ describe Matplotcr do
       y = x.map { |n| Math.sin(n / 50.0) }
       lineplot = Matplotcr::LinePlot.new(x, y, colour: "red")
       figure.add lineplot
-      figure.add Matplotcr::HorizontalLine.new y: 0 , colour: "black", linestyle: "--"
-      (1..6).each { |i| figure.add Matplotcr::VerticalLine.new x: Math::PI * i * 50.0, colour: "blue", linestyle: "-."}
+      figure.add Matplotcr::HorizontalLine.new y: 0, colour: "black", linestyle: "--"
+      (1..6).each { |i| figure.add Matplotcr::VerticalLine.new x: Math::PI * i * 50.0, colour: "blue", linestyle: "-." }
       figure.save("docs/images/plot_hv_lines.png")
     end
     it "must produce an annotation" do
@@ -122,7 +122,7 @@ describe Matplotcr do
       y = [5.5, 7.6, 11.1, 6.5]
       lineplot = Matplotcr::ScatterPlot.new(x, y)
       figure.add lineplot
-      points = x.zip(y).map { |a,b| [a, b]}
+      points = x.zip(y).map { |a, b| [a, b] }
       (0...2).each { |i| figure.add Matplotcr::Annotation.new points[i][0] + 0.1, points[i][1] + 0.1, "$p_#{i}$" }
       figure.save("docs/images/annotation.png")
     end
@@ -132,8 +132,8 @@ describe Matplotcr do
       y = x.map { |n| Math.sin(n / 50.0) }
       lineplot = Matplotcr::LinePlot.new(x, y, colour: "red")
       figure.add lineplot
-      figure.add Matplotcr::HorizontalLine.new y: 0 , colour: "black", linestyle: "--"
-      (1..6).each { |i| figure.add Matplotcr::VerticalLine.new x: Math::PI * i * 50.0, colour: "blue", linestyle: "-."}
+      figure.add Matplotcr::HorizontalLine.new y: 0, colour: "black", linestyle: "--"
+      (1..6).each { |i| figure.add Matplotcr::VerticalLine.new x: Math::PI * i * 50.0, colour: "blue", linestyle: "-." }
       figure.save("docs/images/custom_size.png", dpi: 180)
     end
     it "must produce side-by-side plots" do
@@ -142,9 +142,9 @@ describe Matplotcr do
       y = x.map { |n| Math.sin(n / 50.0) }
       lineplot = Matplotcr::LinePlot.new(x, y, colour: "red")
       figure.add lineplot
-      figure.add Matplotcr::HorizontalLine.new y: 0 , colour: "black", linestyle: "--"
-      (1..6).each { |i| figure.add Matplotcr::VerticalLine.new x: Math::PI * i * 50.0, colour: "blue", linestyle: "-."}
-      figure.subplot()
+      figure.add Matplotcr::HorizontalLine.new y: 0, colour: "black", linestyle: "--"
+      (1..6).each { |i| figure.add Matplotcr::VerticalLine.new x: Math::PI * i * 50.0, colour: "blue", linestyle: "-." }
+      figure.subplot
       x = [1, 2, 3, 4]
       y = [5.5, 7.6, 11.1, 6.5]
       lineplot = Matplotcr::LinePlot.new(x, y)
@@ -160,7 +160,7 @@ describe Matplotcr do
         if n > 0
           figure.subplot
         end
-        figure.add Matplotcr::LinePlot.new(x, x.map { |i| Math.sin n.to_f * i}, colour: "red")
+        figure.add Matplotcr::LinePlot.new(x, x.map { |i| Math.sin n.to_f * i }, colour: "red")
       }
       figure.save("docs/images/grid.png")
     end
@@ -176,5 +176,4 @@ describe Matplotcr do
       figure.save("docs/images/limits.png")
     end
   end
-
 end

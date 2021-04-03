@@ -14,6 +14,7 @@ module Matplotcr
 
   class RCFont
     getter family, styles
+
     def initialize(@family : String, @styles : Array(String))
     end
   end
@@ -34,7 +35,7 @@ module Matplotcr
       @plots[@current_index].push plot
     end
 
-    def subplot()
+    def subplot
       @current_index += 1
       @plots.push(Array(Plot).new)
     end
@@ -56,7 +57,7 @@ module Matplotcr
         s.push "fig = plt.figure(figsize=(#{fs[0]},#{fs[1]}))"
       end
       (0...@plots.size).each { |n|
-        s.push "plt.subplot(#{@grid[0]}, #{@grid[1]}, #{n+1})"
+        s.push "plt.subplot(#{@grid[0]}, #{@grid[1]}, #{n + 1})"
         @plots[n].each { |plot|
           s.push plot.render
         }
@@ -75,7 +76,6 @@ module Matplotcr
   end
 
   class Title < Plot
-
     def initialize(@text : String, @raw : Bool = true)
     end
 
@@ -86,7 +86,6 @@ module Matplotcr
         return "plt.title(#{@text})"
       end
     end
-
   end
 
   class LinePlot < Plot
@@ -180,11 +179,9 @@ module Matplotcr
 
       return s.join("\n")
     end
-
   end
 
   class Line < Plot
-
     def initialize(@p0 : Tuple(Number, Number), @p1 : Tuple(Number, Number), @colour : String = "", @linestyle : String = "")
     end
 
@@ -193,10 +190,9 @@ module Matplotcr
       if @colour != ""
         args.push "color='#{@colour}'"
       end
-    if @linestyle != ""
+      if @linestyle != ""
         args.push "linestyle='#{@linestyle}'"
       end
-
 
       if !args.empty?
         return "ax = plt.gca()\nax.add_line(Line2D([#{@p0[0]},#{@p1[0]}],[#{@p0[1]},#{@p1[1]}], #{args.join(",")}))"
@@ -204,7 +200,6 @@ module Matplotcr
         return "ax = plt.gca()\nax.add_line(Line2D([#{@p0[0]},#{@p1[0]}],[#{@p0[1]},#{@p1[1]}]))"
       end
     end
-
   end
 
   class HorizontalLine < Plot
@@ -229,8 +224,8 @@ module Matplotcr
   end
 
   class VerticalLine < Plot
-      def initialize(@x : Number, @colour : String = "", @linestyle : String = "")
-      end
+    def initialize(@x : Number, @colour : String = "", @linestyle : String = "")
+    end
 
     def render : String
       args = Array(String).new
@@ -259,7 +254,7 @@ module Matplotcr
       if !colour.nil?
         args.push "color='#{colour}'"
       end
-      
+
       if args.empty?
         return "ax=plt.gca()\nax.annotate('#{@text}', xy=(#{@x}, #{@y}))"
       else
@@ -285,5 +280,4 @@ module Matplotcr
       return "ax=plt.gca()\nax.set_ylim([#{@min},#{@max}])"
     end
   end
-
 end
